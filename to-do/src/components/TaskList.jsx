@@ -1,7 +1,7 @@
 // TaskList.jsx
 import React from "react";
 import TaskCard from "./TaskCard";
-// import "./TaskList.css";
+import "./TaskList.css";
 
 function TaskList({ tasks, toggleComplete, deleteTask }) {
   return (
