@@ -1,0 +1,39 @@
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  input, select, button {
+    flex: 1 1 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  input::placeholder {
+    color: #999;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    flex: 1;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  @media (min-width: 600px) {
+    input, select {
+      flex: 1;
+    }
+  
+    button {
+      flex: 0 0 auto;
+    }
+  }
+  

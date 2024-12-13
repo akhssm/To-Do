@@ -1,6 +1,6 @@
 // TaskCard.jsx
 import React from "react";
-// import "./TaskCard.css";
+import "./TaskCard.css";
 
 function TaskCard({ task, toggleComplete, deleteTask }) {
   return (

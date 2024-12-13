@@ -1,6 +1,6 @@
 // FilterBar.jsx
 import React from "react";
-// import "./FilterBar.css";
+import "./FilterBar.css";
 
 function FilterBar({ filter, setFilter }) {
   return (
