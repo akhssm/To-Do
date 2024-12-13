@@ -1,49 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
-import FilterBar from './components/FilterBar';
-import { TaskContext } from './TaskContext';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Header from "./components/Header";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+import FilterBar from "./components/FilterBar";
 
-
-function App() {
+const App = () => {
+  // State to hold tasks and filter
   const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
 
+  // Load tasks from localStorage on initial load
   useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    setTasks(savedTasks);
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(storedTasks);
   }, []);
 
+  // Save tasks to localStorage whenever tasks change
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (task) => setTasks([...tasks, task]);
+  // Add task handler
+  const addTask = (task) => {
+    setTasks((prevTasks) => [...prevTasks, task]);
+  };
 
-  const deleteTask = (id) => setTasks(tasks.filter(task => task.id !== id));
+  // Mark task as complete or undo
+  const markAsComplete = (id) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
 
-  const toggleComplete = (id) =>
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+  // Delete a task
+  const deleteTask = (id) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
 
-  const filteredTasks = tasks.filter(task => {
-    if (filter === 'All') return true;
-    return filter === 'Completed' ? task.completed : !task.completed;
+  // Filter tasks based on status
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "All") return true;
+    if (filter === "Completed") return task.completed;
+    if (filter === "Pending") return !task.completed;
+    return true;
   });
 
   return (
-    <div>
-      <FilterBar filter={filter} setFilter={setFilter} />
+    <div className="app">
+      <Header />
       <TaskForm addTask={addTask} />
-      <TaskList
-        tasks={filteredTasks}
-        toggleComplete={toggleComplete}
-        deleteTask={deleteTask}
-      />
+      <FilterBar filter={filter} setFilter={setFilter} />
+      <TaskList tasks={filteredTasks} markAsComplete={markAsComplete} deleteTask={deleteTask} />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,21 +1,19 @@
-// TaskList.jsx
 import React from "react";
-import TaskCard from "./TaskCard";
-import "./TaskList.css";
+import TaskItem from "./TaskCard";
 
-function TaskList({ tasks, toggleComplete, deleteTask }) {
+const TaskList = ({ tasks, markAsComplete, deleteTask }) => {
   return (
     <div className="task-list">
       {tasks.map((task) => (
-        <TaskCard
+        <TaskItem
           key={task.id}
           task={task}
-          toggleComplete={toggleComplete}
+          markAsComplete={markAsComplete}
           deleteTask={deleteTask}
         />
       ))}
     </div>
   );
-}
+};
 
 export default TaskList;
