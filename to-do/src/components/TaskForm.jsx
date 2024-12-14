@@ -1,27 +1,92 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import "./TaskForm.css";
 
-const TaskForm = ({ addTask }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
+
+// const TaskForm = ({ addTask }) => {
+//   const [title, setTitle] = useState("");
+//   const [description, setDescription] = useState("");
+//   const [dueDate, setDueDate] = useState("");
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     if (!title) return;
+
+//     const newTask = {
+//       id: Date.now(),
+//       title,
+//       description,
+//       dueDate,
+//       completed: false,
+//     };
+
+//     addTask(newTask);
+//     setTitle("");
+//     setDescription("");
+//     setDueDate("");
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="task-form">
+//       <input
+//         type="text"
+//         placeholder="Title"
+//         value={title}
+//         onChange={(e) => setTitle(e.target.value)}
+//         required
+//       />
+//       <textarea
+//         placeholder="Description"
+//         value={description}
+//         onChange={(e) => setDescription(e.target.value)}
+//       ></textarea>
+//       <input
+//         type="date"
+//         value={dueDate}
+//         onChange={(e) => setDueDate(e.target.value)}
+//       />
+//       <button type="submit">Add Task</button>
+//     </form>
+//   );
+// };
+
+// export default TaskForm;
+
+
+
+import React, { useState } from "react";
+import "./TaskForm.css";
+
+const TaskForm = ({ addTask, editingTask, updateTask }) => {
+  const [title, setTitle] = useState(editingTask?.title || "");
+  const [description, setDescription] = useState(editingTask?.description || "");
+  const [dueDate, setDueDate] = useState(editingTask?.dueDate || "");
+  const [priority, setPriority] = useState(editingTask?.priority || "Medium");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!title) return;
 
-    const newTask = {
-      id: Date.now(),
+    const task = {
+      id: editingTask ? editingTask.id : Date.now(),
       title,
       description,
       dueDate,
+      priority,
       completed: false,
     };
 
-    addTask(newTask);
+    if (editingTask) {
+      updateTask(task);
+    } else {
+      addTask(task);
+    }
+
     setTitle("");
     setDescription("");
     setDueDate("");
+    setPriority("Medium");
   };
 
   return (
@@ -43,7 +108,16 @@ const TaskForm = ({ addTask }) => {
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
-      <button type="submit">Add Task</button>
+      <select
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
+        required
+      >
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button type="submit">{editingTask ? "Update Task" : "Add Task"}</button>
     </form>
   );
 };

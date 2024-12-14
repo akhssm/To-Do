@@ -1,4 +1,4 @@
-.App {
+/* .App {
   width: 80%;
   margin: 0 auto;
   padding: 20px;
@@ -42,4 +42,90 @@ button {
 
 .filters button {
   margin-right: 10px;
+} */
+
+
+
+
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+/* App container */
+.app {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .app {
+  background: #1e1e1e;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+body.dark-mode h1 {
+  color: #f4f4f4;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filters button:hover {
+  background-color: #0056b3;
+}
+
+.filters button:focus {
+  outline: none;
+}
+
+body.dark-mode .filters button {
+  background-color: #555;
+}
+
+body.dark-mode .filters button:hover {
+  background-color: #777;
 }

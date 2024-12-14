@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,28 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #282c34;
+  color: white;
+}
+
+.task-form, .task-list, .filter-bar {
+  margin: 20px;
+}
+
+.task-item.completed {
+  background-color: #d4edda;
+  text-decoration: line-through;
 }
